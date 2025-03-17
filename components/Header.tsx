@@ -1,40 +1,66 @@
 import { assets } from "@/assets/assets";
 import React from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 
 const Header = () => {
   return (
     <div className="w-11/12 max-w-3xl text-center mx-auto h-screen flex flex-col items-center justify-center gap-4">
-      <div>
+      <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+      >
         <Image alt="" src={assets?.profile_img} className="rounded-full w-32" />
-      </div>
-      <h3 className="flex items-end gap-2 text-xl md:text-2xl mb-3 !font-ovo">
-        Hi! I&apos;m William Mark{" "}
+      </motion.div>
+      <motion.h3
+        className="flex items-end gap-2 text-xl md:text-2xl mb-3 !font-ovo"
+        initial={{ y: -20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
+        Hi! I&apos;m Syaiful Anwar
         <Image alt="" src={assets?.hand_icon} className="w-6" />
-      </h3>
-      <h1 className="text-3xl sm:text-6xl lg:text-[66px] !font-ovo">
-        frontend web developer based in London.
-      </h1>
-      <p className="max-w-2xl mx-auto !font-ovo">
-        I am a frontend web developer from California, USA with 10 years of
-        experiencein multiple companies like Microsoft, Apple, Tesla.
-      </p>
+      </motion.h3>
+      <motion.h1
+        className="text-3xl sm:text-6xl lg:text-[66px] !font-ovo"
+        initial={{ y: -30, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
+        frontend web developer based in Jakarta.
+      </motion.h1>
+      <motion.p
+        className="max-w-2xl mx-auto !font-ovo"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.7 }}
+      >
+        I am a frontend web developer from Jakarta, Indonesia with 7 years of
+        experience in multiple companies like DANA and other start-up.
+      </motion.p>
       <div className="flex flex-col sm:flex-row itens-center gap-4 mt-4">
-        <a
+        <motion.a
           href="#contact"
-          className="px-10 py-3 border rounded-full border-white flex items-center gap-2 bg-black text-white"
+          className="px-10 py-3 border rounded-full border-white flex items-center gap-2 bg-black text-white dark:bg-transparent"
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1 }}
         >
           contact me
           <Image alt="" src={assets?.right_arrow_white} className="w-4" />
-        </a>
-        <a
+        </motion.a>
+        <motion.a
           href="/sample-resume.pdf"
           download
-          className="px-10 py-3 border rounded-full border-gray-500 flex items-center gap-2"
+          className="px-10 py-3 border rounded-full border-gray-500 flex items-center gap-2 dark:text-black bg-white"
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.2 }}
         >
           my resume
           <Image alt="" src={assets?.download_icon} className="w-4" />
-        </a>
+        </motion.a>
       </div>
     </div>
   );

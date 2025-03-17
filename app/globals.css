@@ -1,17 +1,16 @@
 @import "tailwindcss";
 
-* {
-  font-family: Outfit;
-}
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
-  --font-display: "Outfit", "sans-serif";
-  --font-ovo: "Ovo", "serif";
-  --font-outfit: "Outfit", "sans-serif";
-  --color-dark-hover: "#2a004a";
-  --color-purple-hover: "#fcf4ff";
+  --font-display: "Outfit", sans-serif;
+  --font-ovo: "Ovo", serif;
+  --font-outfit: Outfit, sans-serif;
+  --color-dark-hover: #2a004a;
+  --color-purple-hover: #fcf4ff;
   --color-regal-blue: #243c5a;
-  --color-dark-theme: "#11001F";
-  --shadow-black: "4px 4px 0 #000";
-  --shadow-white: "4px 4px 0 #fff";
+  --color-dark-theme: #11001f;
+  --shadow-black: 4px 4px 0 #000;
+  --shadow-white: 4px 4px 0 #fff;
+  --auto-grid: repeat(auto-fit, minmax(200px, 1fr));
 }
