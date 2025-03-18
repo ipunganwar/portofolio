@@ -51,7 +51,7 @@ const Header = () => {
           <Image alt="" src={assets?.right_arrow_white} className="w-4" />
         </motion.a>
         <motion.a
-          href="/sample-resume.pdf"
+          href="/syaiful-anwar.pdf"
           download
           className="px-10 py-3 border rounded-full border-gray-500 flex items-center gap-2 dark:text-black bg-white"
           initial={{ y: 30, opacity: 0 }}

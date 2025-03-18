@@ -80,24 +80,34 @@ export const assets = {
 
 export const workData = [
   {
+    title: "Parallax Design",
+    description: "Web Design",
+    bgImage: "/work-0.png",
+    link: "https://react-parallax-example.vercel.app/",
+  },
+  {
     title: "Frontend project",
     description: "Web Design",
     bgImage: "/work-1.png",
+    link: "",
   },
   {
     title: "Geo based app",
     description: "Mobile App",
     bgImage: "/work-2.png",
+    link: "",
   },
-  {
-    title: "Photography site",
-    description: "Web Design",
-    bgImage: "/work-3.png",
-  },
+  //   {
+  //     title: "Photography site",
+  //     description: "Web Design",
+  //     bgImage: "/work-3.png",
+  //     link: "",
+  //   },
   {
     title: "UI/UX designing",
     description: "UI/UX Design",
     bgImage: "/work-4.png",
+    link: "",
   },
 ];
 
