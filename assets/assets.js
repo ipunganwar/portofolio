@@ -86,23 +86,17 @@ export const workData = [
     link: "https://react-parallax-example.vercel.app/",
   },
   {
+    title: "Yoom Meeting",
+    description: "Zoom Clone App",
+    bgImage: "/work-yoom.png",
+    link: "https://nextjs-stream-example.vercel.app/",
+  },
+  {
     title: "Frontend project",
     description: "Web Design",
     bgImage: "/work-1.png",
     link: "",
   },
-  {
-    title: "Geo based app",
-    description: "Mobile App",
-    bgImage: "/work-2.png",
-    link: "",
-  },
-  //   {
-  //     title: "Photography site",
-  //     description: "Web Design",
-  //     bgImage: "/work-3.png",
-  //     link: "",
-  //   },
   {
     title: "UI/UX designing",
     description: "UI/UX Design",
