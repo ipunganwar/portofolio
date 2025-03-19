@@ -92,10 +92,10 @@ export const workData = [
     link: "https://nextjs-stream-example.vercel.app/",
   },
   {
-    title: "Frontend project",
+    title: "Game Awards",
     description: "Web Design",
-    bgImage: "/work-1.png",
-    link: "",
+    bgImage: "/awward.png",
+    link: "https://awwardss-eta.vercel.app/",
   },
   {
     title: "UI/UX designing",
