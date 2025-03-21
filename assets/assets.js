@@ -89,7 +89,7 @@ export const workData = [
   {
     title: "Zoom (Clone)",
     description: "Web Application",
-    stack: "React, Tailwind, Vite",
+    stack: "NextJs, Tailwind, Vite",
     bgImage: "/work-yoom.png",
     link: "https://nextjs-stream-example.vercel.app/",
   },
