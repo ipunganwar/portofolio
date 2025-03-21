@@ -1,5 +1,5 @@
 import { assets, workData } from "@/assets/assets";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 
@@ -7,6 +7,7 @@ interface Props {
   isDarkMode: boolean;
 }
 const Work = ({ isDarkMode }: Props) => {
+  const [visibleProjects, setVisibleProjects] = useState(4);
   return (
     <motion.div
       id="work"
@@ -48,11 +49,15 @@ const Work = ({ isDarkMode }: Props) => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.9 }}
       >
-        {workData?.map((project, index) => (
+        {workData?.slice(0, visibleProjects).map((project, index) => (
           <motion.div
             key={index}
+            layout
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5 }}
             whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
             className="aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group"
             style={{ backgroundImage: `url(${project?.bgImage})` }}
           >
@@ -80,7 +85,8 @@ const Work = ({ isDarkMode }: Props) => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 1.1 }}
-        href=""
+        // href=""
+        onClick={() => setVisibleProjects((prev) => prev + visibleProjects)}
         className="w-max flex items-center justify-center gap-2 text-gray-700 border-[0.5px] border-gray-700 rounded-full px-10 py-3 mx-auto my-20 hover:bg-purple-hover duration-500 dark:text-white dark:border-white dark:hover:bg-dark-hover"
       >
         Show more
