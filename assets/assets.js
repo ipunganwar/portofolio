@@ -82,18 +82,21 @@ export const workData = [
   {
     title: "Parallax Design",
     description: "Web Design",
+    stack: "HTML, CSS",
     bgImage: "/work-0.png",
     link: "https://react-parallax-example.vercel.app/",
   },
   {
     title: "Zoom (Clone)",
     description: "Web Application",
+    stack: "React, Tailwind, Vite",
     bgImage: "/work-yoom.png",
     link: "https://nextjs-stream-example.vercel.app/",
   },
   {
     title: "Game Awards",
     description: "Web Design",
+    stack: "React, Tailwind, Vite",
     bgImage: "/awward.png",
     link: "https://awwardss-eta.vercel.app/",
   },

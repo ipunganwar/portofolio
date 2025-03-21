@@ -60,6 +60,7 @@ const Work = ({ isDarkMode }: Props) => {
               <div>
                 <h2 className="font-semibold">{project?.title}</h2>
                 <p className="text-sm text-gray-700">{project?.description}</p>
+                <p className="text-xs text-gray-800">{project?.stack}</p>
               </div>
               <div className="border rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition">
                 <a href={project?.link} target="_blank">
