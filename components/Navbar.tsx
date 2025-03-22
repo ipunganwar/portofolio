@@ -40,7 +40,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }: Props) => {
       <nav
         className={`w-full fixed px-5 lg:px-8 xl:px-[8%] py-4 flex items-center justify-between ${
           isScroll
-            ? "bg-white/50 backdrop:blur-lg shadow-sm dark:bg-dark-theme dark:shadow-white/20"
+            ? "bg-white/50 backdrop:blur-lg shadow-sm dark:bg-dark-theme dark:shadow-white/20 z-40"
             : ""
         }`}
       >
