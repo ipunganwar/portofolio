@@ -12,7 +12,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }: Props) => {
 
   const openMenu = () => {
     if (sideMenuRef.current) {
-      sideMenuRef.current.style.transform = "translateX(-16rem)";
+      sideMenuRef.current.style.transform = "translateX(0)";
     }
   };
 
