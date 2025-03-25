@@ -101,6 +101,13 @@ export const workData = [
     link: "https://awwardss-eta.vercel.app/",
   },
   {
+    title: "Banking Dashboard",
+    description: "Web Application",
+    stack: "Next, Tailwind, Dwolla, Plaid, Appwrite",
+    bgImage: "/work-3.png",
+    link: "https://bank-dashboard-plum.vercel.app/",
+  },
+  {
     title: "UI/UX designing",
     description: "UI/UX Design",
     bgImage: "/work-4.png",
