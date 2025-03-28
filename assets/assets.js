@@ -80,6 +80,13 @@ export const assets = {
 
 export const workData = [
   {
+    title: "AI Interviewer",
+    description: "Web App",
+    stack: "Next Js, AI, Vapi, Gemini, Firebase",
+    bgImage: "/robot.png",
+    link: "https://ai-mock-interview-virid.vercel.app/",
+  },
+  {
     title: "Parallax Design",
     description: "Web Design",
     stack: "HTML, CSS",
