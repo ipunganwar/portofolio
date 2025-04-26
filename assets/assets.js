@@ -108,6 +108,13 @@ export const workData = [
     link: "https://awwardss-eta.vercel.app/",
   },
   {
+    title: "Movie App",
+    description: "Mobile Application",
+    stack: "React Native, Tailwind",
+    bgImage: "/movie_app.png",
+    link: "",
+  },
+  {
     title: "Banking Dashboard",
     description: "Web Application",
     stack: "Next, Tailwind, Dwolla, Plaid, Appwrite",
