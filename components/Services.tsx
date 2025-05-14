@@ -35,8 +35,10 @@ const Services = () => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.7 }}
       >
-        I am a frontend web developer from Jakarta, Indonesia with 7 years of
-        experience in multiple companies like DANA and other start-up.
+        I provide end-to-end frontend development services, leveraging 7 years
+        of experience working with companies like DANA and various tech
+        startups. My focus is on building scalable, performant, and
+        user-friendly web interfaces tailored to your business needs.
       </motion.p>
 
       <motion.div

@@ -57,10 +57,10 @@ const About = ({ isDarkMode }: Props) => {
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           <p className="mb-10 max-w-2xl font-ovo">
-            I am experienced Frontend Developer with over a decade of
-            professional expertise in the field. Throughout my carrer, I had the
-            privillege of collaborating with prestigious organizations,
-            contributing to their success and growth.
+            With 7 years of experience in web development, I’ve contributed to
+            both large-scale companies like DANA and agile tech
+            startups—delivering scalable, user-centric interfaces. I’m currently
+            based in Jakarta, Indonesia.
           </p>
 
           <motion.ul

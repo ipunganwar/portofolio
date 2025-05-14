@@ -36,8 +36,9 @@ const Header = () => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.7 }}
       >
-        I am a frontend web developer from Jakarta, Indonesia with 7 years of
-        experience in multiple companies like DANA and other start-up.
+        With 7 years of experience in the web development industry, I’ve worked
+        with large-scale companies like DANA and fast-paced tech
+        startups—building scalable, user-focused web interfaces.
       </motion.p>
       <div className="flex flex-col sm:flex-row itens-center gap-4 mt-4">
         <motion.a
