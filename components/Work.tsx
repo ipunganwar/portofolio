@@ -85,11 +85,18 @@ const Work = ({ isDarkMode }: Props) => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 1.1 }}
-        // href=""
-        onClick={() => setVisibleProjects((prev) => prev + visibleProjects)}
+        onClick={() => {
+          if (visibleProjects >= workData.length) {
+            // Sudah tampil semua, reset ke awal
+            setVisibleProjects(4);
+          } else {
+            // Tampilkan lebih banyak
+            setVisibleProjects((prev) => prev + visibleProjects);
+          }
+        }}
         className="w-max flex items-center justify-center gap-2 text-gray-700 border-[0.5px] border-gray-700 rounded-full px-10 py-3 mx-auto my-20 hover:bg-purple-hover duration-500 dark:text-white dark:border-white dark:hover:bg-dark-hover"
       >
-        Show more
+        {visibleProjects < workData?.length ? "Show more" : "Show less"}
         <Image
           alt="right_arrow"
           src={
