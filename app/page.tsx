@@ -7,32 +7,17 @@ import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import Services from "@/components/Services";
 import Work from "@/components/Work";
-import { useEffect, useState } from "react";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Home() {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-
-  useEffect(() => {
-    const isDark =
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-    setIsDarkMode(isDark);
-  }, []);
-
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.setAttribute("data-theme", "dark");
-      localStorage.theme = "dark";
-    } else {
-      document.documentElement.setAttribute("data-theme", "light");
-      localStorage.theme = "";
-    }
-  }, [isDarkMode]);
+  const { isDarkMode, setIsDarkMode } = useTheme();
   return (
     <>
-      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      <Navbar
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+        isInArticle={false}
+      />
       <Header />
       <About isDarkMode={isDarkMode} />
       <Services />

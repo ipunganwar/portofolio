@@ -1,12 +1,14 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { assets } from "@/assets/assets";
+import Link from "next/link";
 
 interface Props {
   isDarkMode: boolean;
   setIsDarkMode: (arg: boolean) => void;
+  isInArticle: boolean;
 }
-const Navbar = ({ isDarkMode, setIsDarkMode }: Props) => {
+const Navbar = ({ isDarkMode, setIsDarkMode, isInArticle }: Props) => {
   const [isScroll, setIsScroll] = useState(false);
   const sideMenuRef = useRef<HTMLUListElement | null>(null);
 
@@ -32,6 +34,56 @@ const Navbar = ({ isDarkMode, setIsDarkMode }: Props) => {
     });
   }, []);
 
+  const menuWithoutArticle = () => (
+    <>
+      <li>
+        <Link href="/" className="!font-ovo">
+          Home
+        </Link>
+      </li>
+      <li>
+        <a href="#about" className="!font-ovo">
+          About Me
+        </a>
+      </li>
+      <li>
+        <a href="#services" className="!font-ovo">
+          Services
+        </a>
+      </li>
+      <li>
+        <a href="#work" className="!font-ovo">
+          My Work
+        </a>
+      </li>
+      <li>
+        <Link href="/articles" className="!font-ovo">
+          Articles
+        </Link>
+      </li>
+      <li>
+        <a href="#contact" className="!font-ovo">
+          Contact Me
+        </a>
+      </li>
+    </>
+  );
+
+  const menuInArticle = () => (
+    <>
+      <li>
+        <Link href="/" className="!font-ovo">
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link href="/articles" className="!font-ovo">
+          Articles
+        </Link>
+      </li>
+    </>
+  );
+
   return (
     <>
       <div className="fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%] dark:hidden">
@@ -44,7 +96,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }: Props) => {
             : ""
         }`}
       >
-        <a href="#top">
+        <Link href="/">
           <h3 className="text-3xl font-bold cursor-pointer mr-14">
             Syaiful <span className="text-red-600 text-6xl leading-1">.</span>
           </h3>
@@ -53,7 +105,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }: Props) => {
             src={isDarkMode ? assets?.logo_dark : assets?.logo}
             className="w-28 cursor-pointer mr-14"
           /> */}
-        </a>
+        </Link>
         <ul
           className={`hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 ${
             isScroll
@@ -61,31 +113,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }: Props) => {
               : "bg-white/50 shadow-sm dark:border-white/50 dark:bg-transparent dark:border"
           }`}
         >
-          <li>
-            <a href="#top" className="!font-ovo">
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#about" className="!font-ovo">
-              About Me
-            </a>
-          </li>
-          <li>
-            <a href="#services" className="!font-ovo">
-              Services
-            </a>
-          </li>
-          <li>
-            <a href="#work" className="!font-ovo">
-              My Work
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="!font-ovo">
-              Contact Me
-            </a>
-          </li>
+          {!isInArticle ? menuWithoutArticle() : menuInArticle()}
         </ul>
         <div className="flex items-center gap-4">
           <button onClick={() => setIsDarkMode(!isDarkMode)}>
@@ -95,17 +123,20 @@ const Navbar = ({ isDarkMode, setIsDarkMode }: Props) => {
               className="w-6"
             />
           </button>
-          <a
-            href="#contact"
-            className="hidden lg:flex items-center gap-3 px-10 py-2.5 border border-gray-500 rounded-full ml-4 !font-ovo dark:border-white/50"
-          >
-            Contact
-            <Image
-              alt="contact me"
-              src={isDarkMode ? assets?.arrow_icon_dark : assets?.arrow_icon}
-              className="w-3"
-            />
-          </a>
+
+          {!isInArticle && (
+            <a
+              href="#contact"
+              className="hidden lg:flex items-center gap-3 px-10 py-2.5 border border-gray-500 rounded-full ml-4 !font-ovo dark:border-white/50"
+            >
+              Contact
+              <Image
+                alt="contact me"
+                src={isDarkMode ? assets?.arrow_icon_dark : assets?.arrow_icon}
+                className="w-3"
+              />
+            </a>
+          )}
 
           <button className="block md:hidden ml-3" onClick={openMenu}>
             <Image
@@ -129,9 +160,9 @@ const Navbar = ({ isDarkMode, setIsDarkMode }: Props) => {
           </div>
 
           <li>
-            <a href="#top" className="!font-ovo" onClick={closeMenu}>
+            <Link href="/" className="!font-ovo" onClick={closeMenu}>
               Home
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#about" className="!font-ovo" onClick={closeMenu}>
@@ -147,6 +178,11 @@ const Navbar = ({ isDarkMode, setIsDarkMode }: Props) => {
             <a href="#work" className="!font-ovo" onClick={closeMenu}>
               My Work
             </a>
+          </li>
+          <li>
+            <Link href="/articles" className="!font-ovo" onClick={closeMenu}>
+              Articles
+            </Link>
           </li>
           <li>
             <a href="#contact" className="!font-ovo" onClick={closeMenu}>
