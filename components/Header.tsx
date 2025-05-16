@@ -28,7 +28,7 @@ const Header = () => {
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.3 }}
       >
-        frontend web developer based in Jakarta.
+        Frontend Web Developer.
       </motion.h1>
       <motion.p
         className="max-w-2xl mx-auto !font-ovo"
