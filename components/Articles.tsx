@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { articles } from "@/utils/articles";
+import Image from "next/image";
+import articleList from "@/content/article-list";
 
 interface ArticlesProps {
   isDarkMode?: boolean;
 }
 
 const Articles: React.FC<ArticlesProps> = ({ isDarkMode }) => {
+  // State to track which images failed to load
+  const [imgError, setImgError] = useState<Record<string, boolean>>({});
+
   return (
     <section id="articles" className="py-20 px-4 md:px-8 lg:px-16">
       <div className="max-w-6xl mx-auto">
@@ -19,7 +23,7 @@ const Articles: React.FC<ArticlesProps> = ({ isDarkMode }) => {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {articles.map((article) => (
+          {articleList.map((article) => (
             <Link href={`/articles/${article.slug}`} key={article.id}>
               <div
                 className={`rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 ${
@@ -29,16 +33,33 @@ const Articles: React.FC<ArticlesProps> = ({ isDarkMode }) => {
                 }`}
               >
                 <div className="h-48 relative">
-                  {/* Replace with your actual images */}
-                  <div
-                    className={`w-full h-full ${
-                      isDarkMode ? "bg-gray-700" : "bg-gray-200"
-                    } flex items-center justify-center`}
-                  >
-                    <p className="text-sm text-center p-4">
-                      Article Image Placeholder
-                    </p>
-                  </div>
+                  {imgError[article.id] ? (
+                    // Fallback placeholder when image fails to load
+                    <div
+                      className={`w-full h-full ${
+                        isDarkMode ? "bg-gray-700" : "bg-gray-200"
+                      } flex items-center justify-center`}
+                    >
+                      <p className="text-sm text-center p-4">
+                        Image Not Available
+                      </p>
+                    </div>
+                  ) : (
+                    // Try to load the image
+                    <Image
+                      src={article.imageUrl || "/images/placeholder.jpg"}
+                      alt={article.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover"
+                      onError={() => {
+                        setImgError((prev) => ({
+                          ...prev,
+                          [article.id]: true,
+                        }));
+                      }}
+                    />
+                  )}
                 </div>
                 <div className="p-6">
                   <p className="text-sm opacity-75 mb-2">{article.date}</p>

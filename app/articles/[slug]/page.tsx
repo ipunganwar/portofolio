@@ -1,9 +1,10 @@
 "use client";
 
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
 import articleDetails from "@/content";
@@ -18,6 +19,9 @@ export default function ArticlePage({ params }: ArticlePageProps) {
   const { isDarkMode, setIsDarkMode } = useTheme();
   const resolvedParams = use(params);
   const { slug } = resolvedParams;
+
+  // State to track which images failed to load
+  const [imgError, setImgError] = useState<Record<string, boolean>>({});
 
   // Find the article with the matching slug
   const article = articleDetails.find((article) => article.slug === slug);
@@ -70,14 +74,31 @@ export default function ArticlePage({ params }: ArticlePageProps) {
           </div>
 
           <div className="h-64 md:h-80 w-full relative mb-8">
-            {/* Replace with your actual images */}
-            <div
-              className={`w-full h-full ${
-                isDarkMode ? "bg-gray-800" : "bg-gray-200"
-              } flex items-center justify-center rounded-lg`}
-            >
-              <p className="text-center p-4">Article Featured Image</p>
-            </div>
+            {imgError[article.id] ? (
+              // Fallback placeholder when image fails to load
+              <div
+                className={`w-full h-full ${
+                  isDarkMode ? "bg-gray-700" : "bg-gray-200"
+                } flex items-center justify-center`}
+              >
+                <p className="text-sm text-center p-4">Image Not Available</p>
+              </div>
+            ) : (
+              // Try to load the image
+              <Image
+                src={article.imageUrl || "/images/placeholder.jpg"}
+                alt={article.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover"
+                onError={() => {
+                  setImgError((prev) => ({
+                    ...prev,
+                    [article.id]: true,
+                  }));
+                }}
+              />
+            )}
           </div>
 
           <div className="prose max-w-none prose-lg">

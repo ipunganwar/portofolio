@@ -9,7 +9,7 @@ interface Article {
 }
 
 // Sample articles data (you can replace with your own)
-export const articles: Article[] = [
+const articles: Article[] = [
   {
     id: "1",
     title: "How to Build a Modern Portfolio with Next.js",
@@ -37,4 +37,15 @@ export const articles: Article[] = [
     imageUrl: "/assets/article-3.jpg",
     slug: "intro-tailwind-css",
   },
+  {
+    id: "4",
+    title: "All React Concepts Explained",
+    summary:
+      "A comprehensive guide that walks through 20 key React concepts — from JSX and props to portals and error boundaries — in a single, readable article.",
+    date: "May 14, 2025",
+    imageUrl: "/articles/react-concept.webp",
+    slug: "react-concept",
+  },
 ];
+
+export default articles;
