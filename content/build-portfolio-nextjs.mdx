@@ -1,0 +1,125 @@
+# How to Build a Modern Portfolio with Next.js
+
+## Introduction
+
+Building a personal portfolio is essential for developers to showcase their skills and projects. Next.js provides an excellent framework for creating fast, SEO-friendly portfolio websites. In this article, we'll explore how to build a modern portfolio using Next.js and Tailwind CSS.
+
+## Setting Up Your Next.js Project
+
+To get started, create a new Next.js project using the following command:
+
+```bash
+npx create-next-app my-portfolio
+cd my-portfolio
+```
+
+This will set up a new Next.js project with all the necessary configurations.
+
+## Adding Tailwind CSS
+
+Tailwind CSS is a utility-first CSS framework that makes styling your portfolio a breeze. Add Tailwind CSS to your Next.js project:
+
+```bash
+npm install tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+Configure your `tailwind.config.js` file to scan your project files:
+
+```javascript
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+## Creating Essential Components
+
+A good portfolio typically includes these sections:
+
+1. **Header/Navigation**: For easy navigation around your portfolio
+2. **Hero Section**: A brief introduction about yourself
+3. **Projects**: Showcase your best work
+4. **Skills**: Highlight your technical skills
+5. **Experience**: Your work and educational background
+6. **Contact**: How people can reach you
+
+## Implementing Dark Mode
+
+Adding a dark mode toggle can enhance user experience. Here's a simple implementation using React's useState hook:
+
+```jsx
+import { useState } from "react";
+
+export default function Layout({ children }) {
+  const [darkMode, setDarkMode] = useState(false);
+
+  return (
+    <div className={darkMode ? "dark" : ""}>
+      <button onClick={() => setDarkMode(!darkMode)}>
+        Toggle {darkMode ? "Light" : "Dark"} Mode
+      </button>
+      <main className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+        {children}
+      </main>
+    </div>
+  );
+}
+```
+
+## Optimizing Images
+
+Next.js provides an Image component that automatically optimizes images. Use it for all images in your portfolio:
+
+```jsx
+import Image from "next/image";
+
+<Image
+  src="/profile.jpg"
+  alt="Your Name"
+  width={400}
+  height={400}
+  className="rounded-full"
+/>;
+```
+
+## Deploying Your Portfolio
+
+Once your portfolio is ready, deploy it using Vercel for the best performance:
+
+```bash
+npm install -g vercel
+vercel
+```
+
+## Conclusion
+
+Building a portfolio with Next.js and Tailwind CSS allows you to create a fast, responsive, and visually appealing website to showcase your skills. The combination of Next.js's performance benefits and Tailwind's styling flexibility makes it an ideal choice for developers looking to stand out.
+
+Creating a professional portfolio is essential for showcasing your work and skills to potential employers or clients. Next.js provides an excellent framework for building such portfolios due to its performance, SEO capabilities, and developer experience.
+
+## Why Choose Next.js for Your Portfolio?
+
+Next.js offers several advantages:
+
+- **Server-Side Rendering (SSR)** and **Static Site Generation (SSG)** for optimal performance
+- **Automatic code splitting** for faster page loads
+- **Built-in image optimization** with the Image component
+- **File-based routing** that makes navigation structure intuitive
+- **API routes** for backend functionality without needing a separate server
+
+## Getting Started
+
+First, create a new Next.js project:
+
+```bash
+npx create-next-app@latest my-portfolio
+cd my-portfolio
+```

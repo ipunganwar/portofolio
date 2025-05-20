@@ -1,139 +1,50 @@
-"use client";
+import { Suspense } from "react";
+import { mdxArticles } from "@/content/mdx-content-list";
+import ArticleContent from "@/components/ArticleContent";
 
-import React, { use, useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import Link from "next/link";
-import Image from "next/image";
-import { notFound } from "next/navigation";
-import { useTheme } from "@/context/ThemeContext";
-import articleDetails from "@/content";
+// This is a server component that fetches article metadata
+export default async function Page({ params }: { params: { slug: string } }) {
+  const { slug } = await params;
 
-type ArticlePageProps = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
-
-export default function ArticlePage({ params }: ArticlePageProps) {
-  const { isDarkMode, setIsDarkMode } = useTheme();
-  const resolvedParams = use(params);
-  const { slug } = resolvedParams;
-
-  // State to track which images failed to load
-  const [imgError, setImgError] = useState<Record<string, boolean>>({});
-
-  // Find the article with the matching slug
-  const article = articleDetails.find((article) => article.slug === slug);
-
-  // If article not found, return 404
-  if (!article) {
-    notFound();
-  }
+  // Find the article metadata from our MDX articles list
+  const article = mdxArticles.find((a: { slug: string }) => a.slug === slug);
 
   return (
     <>
-      <Navbar
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
-        isInArticle={true}
-      />
-      <div
-        className={`pt-24 pb-16 px-4 md:px-8 lg:px-16 ${
-          isDarkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
-        }`}
-      >
-        <div className="max-w-4xl mx-auto">
-          <Link
-            href="/articles"
-            className="inline-flex items-center mb-6 text-sm font-medium"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-            Back to Articles
-          </Link>
-
-          <div className="mb-8">
-            <p className="text-sm opacity-75 mb-2">{article.date}</p>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">
-              {article.title}
-            </h1>
-            <p className="text-lg opacity-75">{article.summary}</p>
-          </div>
-
-          <div className="h-64 md:h-80 w-full relative mb-8">
-            {imgError[article.id] ? (
-              // Fallback placeholder when image fails to load
-              <div
-                className={`w-full h-full ${
-                  isDarkMode ? "bg-gray-700" : "bg-gray-200"
-                } flex items-center justify-center`}
-              >
-                <p className="text-sm text-center p-4">Image Not Available</p>
-              </div>
-            ) : (
-              // Try to load the image
-              <Image
-                src={article.imageUrl || "/images/placeholder.jpg"}
-                alt={article.title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover"
-                onError={() => {
-                  setImgError((prev) => ({
-                    ...prev,
-                    [article.id]: true,
-                  }));
-                }}
-              />
-            )}
-          </div>
-
-          <div className="prose max-w-none prose-lg">
-            {/* Render markdown content */}
-            <div
-              dangerouslySetInnerHTML={{
-                __html: article.content
-                  .replace(
-                    /^# (.*$)/gim,
-                    '<h1 class="text-3xl font-bold mt-8 mb-4">$1</h1>'
-                  )
-                  .replace(
-                    /^## (.*$)/gim,
-                    '<h2 class="text-2xl font-bold mt-6 mb-3">$1</h2>'
-                  )
-                  .replace(
-                    /^### (.*$)/gim,
-                    '<h3 class="text-xl font-bold mt-5 mb-2">$1</h3>'
-                  )
-                  .replace(/\*\*(.*)\*\*/gim, "<strong>$1</strong>")
-                  .replace(/\*(.*)\*/gim, "<em>$1</em>")
-                  .replace(/\n/gim, "<br />")
-                  .replace(/```(.+?)```/g, (match, p1) => {
-                    const code = p1
-                      .trim()
-                      .replace(/^(bash|jsx|js|html)/m, "")
-                      .trim();
-                    return `<pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg my-4 overflow-x-auto"><code>${code}</code></pre>`;
-                  }),
-              }}
+      {/* ArticleContent is a client component that will handle the dynamic MDX import */}
+      <div className="min-h-screen pt-24 pb-16 px-4 md:px-8">
+        <Suspense
+          fallback={
+            <div className="max-w-4xl mx-auto py-10">Loading article...</div>
+          }
+        >
+          {article ? (
+            <ArticleContent
+              slug={slug}
+              title={article.title}
+              date={article.date}
+              imageUrl={article.imageUrl}
             />
-          </div>
-        </div>
+          ) : (
+            <div className="container mx-auto py-10 px-4">
+              <h1 className="text-3xl font-bold mb-6">Article not found</h1>
+              <p>
+                Sorry, the article you&apos;re looking for could not be loaded.
+              </p>
+            </div>
+          )}
+        </Suspense>
       </div>
-      <Footer isDarkMode={isDarkMode} />
     </>
   );
 }
+
+export function generateStaticParams() {
+  // Generate static params for all MDX articles
+  return mdxArticles.map((article) => ({
+    slug: article.slug
+  }));
+}
+
+// Allow dynamic params for articles that might be added later
+export const dynamicParams = true;

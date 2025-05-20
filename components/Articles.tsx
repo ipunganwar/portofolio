@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import articleList from "@/content/article-list";
+import getArticleList, { MdxArticle, mdxArticles } from "@/content/mdx-content-list";
 
 interface ArticlesProps {
   isDarkMode?: boolean;
 }
 
-const Articles: React.FC<ArticlesProps> = ({ isDarkMode }) => {
+// Use a named function component to fix the display name lint error
+function Articles({ isDarkMode }: ArticlesProps) {
   // State to track which images failed to load
   const [imgError, setImgError] = useState<Record<string, boolean>>({});
+  const [articles, setArticles] = useState<MdxArticle[]>(mdxArticles);
+
+  // Load articles on the client side
+  useEffect(() => {
+    // Get articles from our utility function
+    const articleList = getArticleList();
+    setArticles(articleList);
+  }, []);
 
   return (
     <section id="articles" className="py-20 px-4 md:px-8 lg:px-16">
@@ -23,7 +34,7 @@ const Articles: React.FC<ArticlesProps> = ({ isDarkMode }) => {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {articleList.map((article) => (
+          {articles.map((article) => (
             <Link href={`/articles/${article.slug}`} key={article.id}>
               <div
                 className={`rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 ${
