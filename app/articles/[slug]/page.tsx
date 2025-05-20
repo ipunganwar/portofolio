@@ -2,8 +2,13 @@ import { Suspense } from "react";
 import { mdxArticles } from "@/content/mdx-content-list";
 import ArticleContent from "@/components/ArticleContent";
 
+type PageProps = {
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
 // This is a server component that fetches article metadata
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: PageProps) {
   const { slug } = await params;
 
   // Find the article metadata from our MDX articles list
@@ -42,7 +47,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 export function generateStaticParams() {
   // Generate static params for all MDX articles
   return mdxArticles.map((article) => ({
-    slug: article.slug
+    slug: article.slug,
   }));
 }
 
