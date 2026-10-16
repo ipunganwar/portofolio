@@ -44,8 +44,7 @@ function Articles({ isDarkMode }: ArticlesProps) {
                 }`}
               >
                 <div className="h-48 relative">
-                  {imgError[article.id] ? (
-                    // Fallback placeholder when image fails to load
+                  {!article.imageUrl || imgError[article.id] ? (
                     <div
                       className={`w-full h-full ${
                         isDarkMode ? "bg-gray-700" : "bg-gray-200"
@@ -56,9 +55,8 @@ function Articles({ isDarkMode }: ArticlesProps) {
                       </p>
                     </div>
                   ) : (
-                    // Try to load the image
                     <Image
-                      src={article.imageUrl || "/images/placeholder.jpg"}
+                      src={article.imageUrl}
                       alt={article.title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
